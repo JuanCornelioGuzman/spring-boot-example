@@ -2,6 +2,8 @@ package net.jcornelio.projects.springboot.web.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 /**
  * The Class Todo.
  */
@@ -14,6 +16,7 @@ public class Todo {
   private String user;
 
   /** The desc. */
+  @Size(min=10, message="Enter at least 10 characters")
   private String desc;
 
   /** The target date. */
