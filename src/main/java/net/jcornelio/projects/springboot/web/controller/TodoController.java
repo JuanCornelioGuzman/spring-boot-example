@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.jcornelio.projects.springboot.web.model.Todo;
 import net.jcornelio.projects.springboot.web.service.TodoService;
 
 @Controller
@@ -28,7 +29,9 @@ public class TodoController {
 
   @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
   public String showAddTodoPage(ModelMap model) {
-    return "todo";
+      model.addAttribute("todo", new Todo(0, (String) model.get("name"), "Default Desc",
+              new Date(), false));
+      return "todo";
   }
 
   @RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
@@ -38,8 +41,8 @@ public class TodoController {
   }
 
   @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
-  public String addTodo(ModelMap model, @RequestParam String desc) {
-    todoService.addTodo((String) model.get("name"), desc, new Date(), false);
+  public String addTodo(ModelMap model, Todo todo) {
+    todoService.addTodo((String) model.get("name"), todo.getDesc(), new Date(), false);
     return "redirect:/list-todos";
   }
 

@@ -22,6 +22,10 @@ public class Todo {
   /** The is done. */
   private boolean isDone;
 
+  public Todo() {
+    super();
+  }
+  
   /**
    * Instantiates a new todo.
    *
