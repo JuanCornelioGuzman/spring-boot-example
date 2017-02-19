@@ -15,26 +15,32 @@ import net.jcornelio.projects.springboot.web.service.TodoService;
 @Controller
 @SessionAttributes("name")
 public class TodoController {
-  
+
   @Autowired
   TodoService todoService;
-  
-  @RequestMapping(value="/list-todos", method = RequestMethod.GET)
-  public String showTodos(ModelMap model){
-      String name = (String) model.get("name");
-      model.put("todos", todoService.retrieveTodos(name));
-      return "list-todos";
-  }
-  
-  @RequestMapping(value="/add-todo", method = RequestMethod.GET)
-  public String showAddTodoPage(ModelMap model){
-      return "todo";
+
+  @RequestMapping(value = "/list-todos", method = RequestMethod.GET)
+  public String showTodos(ModelMap model) {
+    String name = (String) model.get("name");
+    model.put("todos", todoService.retrieveTodos(name));
+    return "list-todos";
   }
 
-  @RequestMapping(value="/add-todo", method = RequestMethod.POST)
-  public String addTodo(ModelMap model, @RequestParam String desc){
+  @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
+  public String showAddTodoPage(ModelMap model) {
+    return "todo";
+  }
+
+  @RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
+  public String deleteTodo(ModelMap model, @RequestParam int id) {
+    todoService.deleteTodo(id);
+    return "redirect:/list-todos";
+  }
+
+  @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
+  public String addTodo(ModelMap model, @RequestParam String desc) {
     todoService.addTodo((String) model.get("name"), desc, new Date(), false);
-      return "redirect:/list-todos";
+    return "redirect:/list-todos";
   }
 
 }
