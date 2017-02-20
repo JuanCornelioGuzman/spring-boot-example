@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package net.jcornelio.projects.springboot.web.service;
 
 import java.util.ArrayList;
@@ -65,6 +68,35 @@ public class TodoService {
         iterator.remove();
       }
     }
+  }
+  
+  /**
+   * Gets the todo.
+   *
+   * @param id the id
+   * @return the todo
+   */
+  public Todo getTodo(int id) {
+    Todo requestedTodo = null;
+    Iterator<Todo> iterator = todos.iterator();
+    while (iterator.hasNext()) {
+      Todo todo = iterator.next();
+      if (todo.getId() == id) {
+        requestedTodo = todo;
+        break;
+      }
+    }
+    return requestedTodo;
+  }
+  
+  /**
+   * Update todo.
+   *
+   * @param todo the todo
+   */
+  public void updateTodo(Todo todo) {
+    todos.remove(todo);
+    todos.add(todo);
   }
 
 }
