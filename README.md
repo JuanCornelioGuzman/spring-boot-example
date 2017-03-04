@@ -9,3 +9,11 @@ Original codes are from https://github.com/in28minutes
 	- Update To Do
 	- Delete To Do
 - Logout
+
+## Technologies Involve
+- Spring Boot
+- Bootstrap
+- Spring Security
+
+## How To Run the Application
+- Execute SpringBootExampleApplication as a Java Application.
